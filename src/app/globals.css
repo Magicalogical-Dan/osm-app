@@ -15,7 +15,7 @@ body {
   min-height: 100vh;
   margin: 0;
   padding: 0;
-  overflow: hidden;
+  overflow-x: hidden;
   -webkit-text-size-adjust: 100%;
   -ms-text-size-adjust: 100%;
   text-size-adjust: 100%;
@@ -140,14 +140,77 @@ html {
   .scroll-container {
     -webkit-overflow-scrolling: touch;
   }
+  
+  /* Reduce font sizes for mobile */
+  h1 {
+    font-size: 1.25rem;
+    line-height: 1.2;
+  }
+  
+  h2 {
+    font-size: 1.125rem;
+    line-height: 1.3;
+  }
+  
+  h3 {
+    font-size: 1rem;
+    line-height: 1.4;
+  }
+  
+  /* Improve spacing for mobile */
+  .container {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+  }
 }
 
 /* Tablet optimizations */
 @media (min-width: 641px) and (max-width: 1024px) {
   /* Ensure proper spacing on tablets */
   .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  
+  /* Optimize font sizes for tablets */
+  h1 {
+    font-size: 1.75rem;
+    line-height: 1.2;
+  }
+  
+  h2 {
+    font-size: 1.5rem;
+    line-height: 1.3;
+  }
+  
+  h3 {
+    font-size: 1.25rem;
+    line-height: 1.4;
+  }
+}
+
+/* Laptop optimizations */
+@media (min-width: 1025px) {
+  /* Ensure proper spacing on laptops */
+  .container {
     padding-left: 1.5rem;
     padding-right: 1.5rem;
+  }
+  
+  /* Optimize font sizes for laptops */
+  h1 {
+    font-size: 2rem;
+    line-height: 1.2;
+  }
+  
+  h2 {
+    font-size: 1.75rem;
+    line-height: 1.3;
+  }
+  
+  h3 {
+    font-size: 1.5rem;
+    line-height: 1.4;
   }
 }
 

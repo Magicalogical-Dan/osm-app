@@ -149,7 +149,7 @@ export default function SettingsPage() {
 
   return (
     <AuthGuard>
-      <div className="min-h-screen bg-black">
+      <div className="bg-black">
       {/* Background letter */}
       <div className="absolute inset-0 flex items-center justify-center overflow-hidden">
         <Image
@@ -169,7 +169,7 @@ export default function SettingsPage() {
       </div>
       
       {/* Content */}
-      <div className="relative z-10 min-h-screen">
+      <div className="relative z-10">
         <div className="max-w-4xl mx-auto px-4 pt-24 pb-48">
           <div className="flex items-center space-x-3 mb-8">
             <Settings className="w-8 h-8 text-white" />

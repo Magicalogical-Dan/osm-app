@@ -14,9 +14,9 @@ export function ConditionalLayout({ children }: ConditionalLayoutProps) {
   // Show loading state while checking authentication
   if (loading) {
     return (
-      <div className="min-h-screen flex flex-col relative z-10">
+      <div className="relative z-10">
         <Navigation />
-        <main className="flex-1">
+        <main className="pt-16 sm:pt-18 md:pt-20 lg:pt-20 xl:pt-20 pb-16 sm:pb-20 lg:pb-24">
           {children}
         </main>
         <DynamicFooter />
@@ -27,9 +27,9 @@ export function ConditionalLayout({ children }: ConditionalLayoutProps) {
   // If user is logged in, show full layout with navigation and footer
   if (user) {
     return (
-      <div className="min-h-screen flex flex-col relative z-10">
+      <div className="relative z-10">
         <Navigation />
-        <main className="flex-1">
+        <main className="pt-16 sm:pt-18 md:pt-20 lg:pt-20 xl:pt-20 pb-16 sm:pb-20 lg:pb-24">
           {children}
         </main>
         <DynamicFooter />
@@ -39,8 +39,8 @@ export function ConditionalLayout({ children }: ConditionalLayoutProps) {
 
   // If user is not logged in, show only the content without navigation and footer
   return (
-    <div className="min-h-screen relative z-10">
-      <main className="min-h-screen">
+    <div className="relative z-10">
+      <main>
         {children}
       </main>
     </div>
