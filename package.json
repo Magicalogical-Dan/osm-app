@@ -2,6 +2,7 @@
   "name": "osm-app",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
@@ -9,9 +10,7 @@
     "lint": "eslint",
     "create-admin": "node create-admin-account.js",
     "create-test-user": "node create-test-user.js",
-    "complete-admin": "node complete-admin-setup.js",
-    "scrape-news": "curl -X POST http://localhost:3000/api/news/scrape",
-    "scraper": "curl -X POST http://localhost:3000/api/news/scrape"
+    "complete-admin": "node complete-admin-setup.js"
   },
   "dependencies": {
     "@supabase/auth-helpers-nextjs": "^0.10.0",
