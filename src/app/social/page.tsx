@@ -12,7 +12,6 @@ import {
   MessageCircle, 
   Share2,
   Download,
-  Lightbulb,
   Calendar,
   BarChart3,
   FileText

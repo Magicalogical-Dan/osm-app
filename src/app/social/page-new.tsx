@@ -4,7 +4,6 @@ import { useState, useEffect } from 'react'
 import { useAuth } from '@/components/providers'
 import { supabase } from '@/lib/supabase'
 import { Profile } from '@/lib/supabase'
-import { InstagramFeed } from '@/components/instagram-feed'
 import { 
   Users, 
   Instagram, 
@@ -14,8 +13,6 @@ import {
   MessageCircle, 
   Share2,
   Download,
-  Lightbulb,
-  Eye,
   Calendar,
   BarChart3,
   FileText
@@ -281,61 +278,6 @@ export default function SocialPage() {
           </div>
         </div>
 
-        {/* Instagram Feed Section */}
-        <div className="mb-8">
-          <h2 className="text-2xl font-bold text-white mb-6 flex items-center">
-            <Instagram className="w-6 h-6 mr-3 text-white" />
-            Instagram Feeds
-          </h2>
-          
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            {/* Liam's Instagram Feed */}
-            <InstagramFeed
-              username="liammarshall20"
-              displayName="Liam Marshall"
-              profileUrl="https://www.instagram.com/liammarshall20/"
-              recentPosts={[
-                {
-                  url: "https://www.instagram.com/p/DO8MzC7CVUS/",
-                  caption: "Great training session today! 💪 #rugby #training #osm",
-                  likes: 234,
-                  comments: 18,
-                  timestamp: "2 hours ago"
-                },
-                {
-                  url: "https://www.instagram.com/p/DO3KxAqjPOb/",
-                  caption: "Match day prep 🏉 #rugby #matchday #osm",
-                  likes: 189,
-                  comments: 12,
-                  timestamp: "1 day ago"
-                }
-              ]}
-            />
-
-            {/* George's Instagram Feed */}
-            <InstagramFeed
-              username="georgewilliamss"
-              displayName="George Williams"
-              profileUrl="https://www.instagram.com/georgewilliamss/"
-              recentPosts={[
-                {
-                  url: "https://www.instagram.com/p/DPaxWSNDMoN/",
-                  caption: "Recovery day essentials 🧘‍♂️ #recovery #rugby #osm",
-                  likes: 156,
-                  comments: 8,
-                  timestamp: "4 hours ago"
-                },
-                {
-                  url: "https://www.instagram.com/p/DO31olnjME8/",
-                  caption: "Game day focus 💯 #rugby #gameday #osm",
-                  likes: 278,
-                  comments: 22,
-                  timestamp: "2 days ago"
-                }
-              ]}
-            />
-          </div>
-        </div>
 
         {/* Social Links */}
         <div className="mb-8">
