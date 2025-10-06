@@ -38,10 +38,17 @@ export interface NewsArticle {
   id: string
   title: string
   content: string
+  excerpt?: string
+  url: string
+  source: string
   sport: 'rugby_league' | 'rugby_union' | 'both'
   league?: string
   club?: string
+  competition?: string
+  tags?: string[]
+  image_url?: string
   published_at: string
+  scraped_at: string
   created_at: string
 }
 
