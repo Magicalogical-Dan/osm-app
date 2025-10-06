@@ -24,8 +24,8 @@ const pageColors: Record<string, string> = {
   '/social': 'rgb(101, 165, 44)', // Green
   '/players': 'rgb(101, 165, 44)', // Green
   '/support': 'rgb(234, 54, 36)', // Red
-  '/settings': 'rgb(255, 255, 255)', // White
-  '/profile': 'rgb(255, 255, 255)', // White
+  '/settings': 'rgb(0, 0, 0)', // Black
+  '/profile': 'rgb(0, 0, 0)', // Black
 }
 
 // Helper function to check if a path starts with a specific route

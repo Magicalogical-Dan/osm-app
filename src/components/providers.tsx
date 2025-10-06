@@ -45,7 +45,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
     )
 
     return () => subscription.unsubscribe()
-  }, [supabase.auth, router])
+  }, [router])
 
   const signOut = async () => {
     await supabase.auth.signOut()

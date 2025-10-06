@@ -11,18 +11,12 @@ import {
   Newspaper, 
   Users, 
   HelpCircle, 
-  User
+  Route
 } from 'lucide-react'
 
 export default function Home() {
   const { user } = useAuth()
   const [userRole, setUserRole] = useState<'admin' | 'user' | null>(null)
-
-  useEffect(() => {
-    if (user) {
-      loadUserRole()
-    }
-  }, [user])
 
   const loadUserRole = async () => {
     try {
@@ -39,6 +33,12 @@ export default function Home() {
       console.error('Error loading user role:', error)
     }
   }
+
+  useEffect(() => {
+    if (user) {
+      loadUserRole()
+    }
+  }, [user, loadUserRole])
 
   if (!user) {
     return (
@@ -73,8 +73,6 @@ export default function Home() {
   const getQuickLinks = () => {
     const baseLinks = [
       { name: 'News', href: '/news', icon: Newspaper, color: 'osm-blue', description: 'Stay updated with the latest rugby news' },
-      { name: 'Support', href: '/support', icon: HelpCircle, color: 'osm-red', description: 'Get help from your agent and support team' },
-      { name: 'Profile', href: '/profile', icon: User, color: 'osm-blue', description: 'Update your player profile and preferences' },
     ]
 
     // Check if user is admin by role or by email (fallback)
@@ -82,13 +80,15 @@ export default function Home() {
     
     if (isAdmin) {
       return [
-        ...baseLinks,
         { name: 'Players', href: '/players', icon: Users, color: 'osm-green', description: 'Manage player profiles and social media' },
+        ...baseLinks,
       ]
     } else {
       return [
-        ...baseLinks,
         { name: 'Social', href: '/social', icon: Users, color: 'osm-green', description: 'Manage your social media presence' },
+        ...baseLinks,
+        { name: 'Support', href: '/support', icon: HelpCircle, color: 'osm-red', description: 'Get help from your agent and support team' },
+        { name: 'Routes', href: 'https://learner.routes-app.com', icon: Route, color: 'osm-blue', description: 'Access your learning routes and training' },
       ]
     }
   }

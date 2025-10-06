@@ -4,7 +4,7 @@ import Image from 'next/image'
 import { useColor } from './color-context'
 
 export function CyclingBackground() {
-  const { currentColor, currentColorIndex } = useColor()
+  const { currentColorIndex } = useColor()
   
   const colors = [
     { bg: 'rgb(40, 88, 200)', image: '/images/O.png', name: 'blue' },

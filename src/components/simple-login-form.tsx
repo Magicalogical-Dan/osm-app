@@ -24,7 +24,7 @@ export function SimpleLoginForm() {
     }, 5000) // Change every 5 seconds
 
     return () => clearInterval(interval)
-  }, [])
+  }, [colors.length])
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -42,7 +42,7 @@ export function SimpleLoginForm() {
       } else {
         router.push('/')
       }
-    } catch (err) {
+    } catch {
       setError('An unexpected error occurred')
     } finally {
       setLoading(false)

@@ -29,7 +29,7 @@ export function LoginForm() {
       } else {
         router.push('/')
       }
-    } catch (err) {
+    } catch {
       setError('An unexpected error occurred')
     } finally {
       setLoading(false)

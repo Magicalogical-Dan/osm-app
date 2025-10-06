@@ -20,7 +20,7 @@ export default function NewsPage() {
   const { user } = useAuth()
   const [articles, setArticles] = useState<NewsArticle[]>([])
   const [loading, setLoading] = useState(true)
-  const [selectedCategory, setSelectedCategory] = useState('All')
+  // const [selectedCategory, setSelectedCategory] = useState('All')
   const [filteredArticles, setFilteredArticles] = useState<NewsArticle[]>([])
 
   useEffect(() => {
@@ -50,23 +50,49 @@ export default function NewsPage() {
     }
   }
 
-  const categories = ['All', 'Rugby League', 'Rugby Union', 'Transfers', 'Player Features', 'Match Reports']
+  const [selectedLeague, setSelectedLeague] = useState('All')
+  const [selectedClub, setSelectedClub] = useState('All')
 
-  const handleCategoryFilter = (category: string) => {
-    setSelectedCategory(category)
-    if (category === 'All') {
-      setFilteredArticles(articles)
-    } else {
-      const filtered = articles.filter(article => {
-        if (category === 'Rugby League') return article.sport === 'rugby_league'
-        if (category === 'Rugby Union') return article.sport === 'rugby_union'
-        if (category === 'Transfers') return article.tags?.includes('Transfer News')
-        if (category === 'Player Features') return article.tags?.includes('Player Interviews')
-        if (category === 'Match Reports') return article.tags?.includes('Match Reports')
-        return true
-      })
-      setFilteredArticles(filtered)
+  // Generate unique leagues from articles
+  const leagues = ['All', ...Array.from(new Set(articles.map(article => article.league).filter(Boolean)))]
+
+  // Generate unique clubs from articles
+  const clubs = ['All', ...Array.from(new Set(articles.map(article => article.club).filter(Boolean)))]
+
+  // Generate sport categories
+  // const sportCategories = ['All', 'Rugby League', 'Rugby Union', 'Both Sports']
+
+  const handleLeagueFilter = (league: string) => {
+    setSelectedLeague(league)
+    applyFilters(selectedClub || 'All', league)
+  }
+
+  const handleClubFilter = (club: string) => {
+    setSelectedClub(club)
+    applyFilters(club, selectedLeague || 'All')
+  }
+
+  const applyFilters = (club: string, league: string) => {
+    let filtered = articles
+
+    // Filter by club
+    if (club !== 'All') {
+      filtered = filtered.filter(article => article.club === club)
     }
+
+    // Filter by league
+    if (league !== 'All') {
+      filtered = filtered.filter(article => article.league === league)
+    }
+
+    setFilteredArticles(filtered)
+  }
+
+  // Reset filters
+  const resetFilters = () => {
+    setSelectedClub('All')
+    setSelectedLeague('All')
+    setFilteredArticles(articles)
   }
 
   const getReadTime = (content: string) => {
@@ -168,26 +194,59 @@ export default function NewsPage() {
               </div>
             </div>
 
-            {/* Category Filter */}
-            <div className="mb-8">
+            {/* Dynamic Filters */}
+            <div className="mb-8 space-y-6">
+              {/* League Filter */}
               <div className="bg-white/20 backdrop-blur-sm rounded-2xl p-6 border-2 border-white/30">
-                <h3 className="text-lg font-semibold text-white mb-4">Filter by Category</h3>
+                <h3 className="text-lg font-semibold text-white mb-4">Filter by League</h3>
                 <div className="flex flex-wrap gap-2">
-                  {categories.map((category) => (
+                  {leagues.map((league) => (
                     <button
-                      key={category}
-                      onClick={() => handleCategoryFilter(category)}
+                      key={league}
+                      onClick={() => handleLeagueFilter(league || 'All')}
                       className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 ${
-                        selectedCategory === category 
+                        selectedLeague === league 
                           ? 'bg-white/30 text-white border-2 border-white/50' 
                           : 'bg-white/10 text-white/80 border border-white/30 hover:bg-white/20 hover:border-white/40'
                       }`}
                     >
-                      {category}
+                      {league}
                     </button>
                   ))}
                 </div>
               </div>
+
+              {/* Club Filter */}
+              <div className="bg-white/20 backdrop-blur-sm rounded-2xl p-6 border-2 border-white/30">
+                <h3 className="text-lg font-semibold text-white mb-4">Filter by Club</h3>
+                <div className="flex flex-wrap gap-2">
+                  {clubs.map((club) => (
+                    <button
+                      key={club}
+                      onClick={() => handleClubFilter(club || 'All')}
+                      className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 ${
+                        selectedClub === club 
+                          ? 'bg-white/30 text-white border-2 border-white/50' 
+                          : 'bg-white/10 text-white/80 border border-white/30 hover:bg-white/20 hover:border-white/40'
+                      }`}
+                    >
+                      {club}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Reset Filters */}
+              {(selectedClub !== 'All' || selectedLeague !== 'All') && (
+                <div className="text-center">
+                  <button
+                    onClick={resetFilters}
+                    className="bg-white/20 text-white px-6 py-2 rounded-lg font-medium hover:bg-white/30 transition-all duration-300 border border-white/30"
+                  >
+                    Reset All Filters
+                  </button>
+                </div>
+              )}
             </div>
 
             {/* News Articles */}
@@ -197,9 +256,9 @@ export default function NewsPage() {
                   <Newspaper className="w-16 h-16 text-white/60 mx-auto mb-4" />
                   <h3 className="text-xl font-semibold text-white mb-2">No Articles Found</h3>
                   <p className="text-white/80">
-                    {selectedCategory === 'All' 
+                    {selectedClub === 'All' && selectedLeague === 'All'
                       ? 'No articles are available at the moment.' 
-                      : `No articles found for the ${selectedCategory} category.`
+                      : `No articles found for the selected filters. Try adjusting your league or club selection.`
                     }
                   </p>
                 </div>
@@ -211,9 +270,11 @@ export default function NewsPage() {
                       <div className="lg:w-1/3">
                         <div className="aspect-video bg-white/10 rounded-lg border border-white/20 flex items-center justify-center">
                           {article.image_url ? (
-                            <img 
+                            <Image 
                               src={article.image_url} 
                               alt={article.title}
+                              width={400}
+                              height={225}
                               className="w-full h-full object-cover rounded-lg"
                             />
                           ) : (

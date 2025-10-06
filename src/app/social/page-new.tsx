@@ -29,13 +29,6 @@ export default function SocialPage() {
     postsThisWeek: 0,
   })
 
-  useEffect(() => {
-    if (user) {
-      loadProfile()
-      loadSocialStats()
-    }
-  }, [user])
-
   const loadProfile = async () => {
     try {
       const { data } = await supabase
@@ -62,6 +55,13 @@ export default function SocialPage() {
       postsThisWeek: 12,
     })
   }
+
+  useEffect(() => {
+    if (user) {
+      loadProfile()
+      loadSocialStats()
+    }
+  }, [user, loadProfile, loadSocialStats])
 
   const socialLinks = [
     {

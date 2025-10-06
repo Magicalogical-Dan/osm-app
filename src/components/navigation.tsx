@@ -12,33 +12,15 @@ import {
   Menu,
   X,
   LogOut,
-  Route,
-  Users,
-  Instagram
+  Users
 } from 'lucide-react'
 
 export function Navigation() {
   const { user, loading, signOut } = useAuth()
-  const { currentColor, isCycling } = useColor()
+  const { currentColor } = useColor()
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [userRole, setUserRole] = useState<'admin' | 'user' | null>(null)
   const [roleLoading, setRoleLoading] = useState(true)
-
-  useEffect(() => {
-    if (user) {
-      loadUserRole()
-    } else {
-      setUserRole(null)
-      setRoleLoading(false)
-    }
-  }, [user])
-
-  // Force refresh role on component mount
-  useEffect(() => {
-    if (user && !userRole && !roleLoading) {
-      loadUserRole()
-    }
-  }, [user, userRole, roleLoading])
 
   const loadUserRole = async () => {
     try {
@@ -52,16 +34,31 @@ export function Navigation() {
       if (data) {
         setUserRole(data.role)
       }
-    } catch (error) {
-      console.error('Error loading user role:', error)
+    } catch {
+      console.error('Error loading user role')
     } finally {
       setRoleLoading(false)
     }
   }
 
+  useEffect(() => {
+    if (user) {
+      loadUserRole()
+    } else {
+      setUserRole(null)
+      setRoleLoading(false)
+    }
+  }, [user, loadUserRole])
+
+  // Force refresh role on component mount
+  useEffect(() => {
+    if (user && !userRole && !roleLoading) {
+      loadUserRole()
+    }
+  }, [user, userRole, roleLoading, loadUserRole])
+
   const getMenuItems = () => {
     const baseItems = [
-      { name: 'Profile', href: '/profile', icon: User },
       { name: 'Settings', href: '/settings', icon: Settings },
     ]
 
@@ -71,15 +68,13 @@ export function Navigation() {
     
     if (isAdmin) {
       return [
-        ...baseItems,
         { name: 'Players', href: '/players', icon: Users },
-        { name: 'Routes', href: '/routes', icon: Route },
+        ...baseItems,
       ]
     } else {
       return [
+        { name: 'Profile', href: '/profile', icon: User },
         ...baseItems,
-        { name: 'Social', href: '/social', icon: Instagram },
-        { name: 'Routes', href: '/routes', icon: Route },
       ]
     }
   }
@@ -140,7 +135,7 @@ export function Navigation() {
             <div className={`absolute top-full right-0 left-0 sm:left-auto sm:min-w-[200px] ${isWhiteBackground ? 'bg-gray-100 border-gray-300' : 'bg-white border-white/20'} rounded-lg shadow-xl border py-4 mx-4 sm:mx-0`}>
               <div className="flex flex-col space-y-1">
                 {roleLoading ? (
-                  <div className="px-4 py-3 text-center text-gray-600">
+                  <div className={`px-4 py-3 text-center ${isWhiteBackground ? 'text-gray-600' : 'text-gray-600'}`}>
                     <div className="animate-pulse">Loading...</div>
                   </div>
                 ) : (
@@ -156,7 +151,7 @@ export function Navigation() {
                     </Link>
                   ))
                 )}
-                <div className="border-t border-gray-200 my-2"></div>
+                <div className={`border-t ${isWhiteBackground ? 'border-gray-200' : 'border-gray-200'} my-2`}></div>
                 <button
                   onClick={() => {
                     signOut()

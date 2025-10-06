@@ -41,12 +41,6 @@ export default function SettingsPage() {
   })
   const supabase = createClientSupabase()
 
-  useEffect(() => {
-    if (user) {
-      loadProfile()
-    }
-  }, [user])
-
   const loadProfile = async () => {
     try {
       const { data } = await supabase
@@ -64,6 +58,12 @@ export default function SettingsPage() {
       setLoading(false)
     }
   }
+
+  useEffect(() => {
+    if (user) {
+      loadProfile()
+    }
+  }, [user, loadProfile])
 
   const handleSaveProfile = async () => {
     if (!user) return
@@ -86,7 +86,7 @@ export default function SettingsPage() {
         setMessage('Settings saved successfully!')
         setTimeout(() => setMessage(''), 3000)
       }
-    } catch (error) {
+    } catch {
       setMessage('An unexpected error occurred')
     } finally {
       setSaving(false)
@@ -116,7 +116,7 @@ export default function SettingsPage() {
 
   if (loading) {
     return (
-      <div className="fixed inset-0 overflow-hidden bg-white">
+      <div className="fixed inset-0 overflow-hidden bg-black">
         <div className="absolute inset-0 flex items-center justify-center overflow-hidden">
           <Image
             src="/images/S.png"
@@ -128,18 +128,18 @@ export default function SettingsPage() {
               width: '150vh',
               height: '150vh',
               objectFit: 'contain',
-              filter: 'brightness(0)'
+              filter: 'brightness(0) invert(1)'
             }}
             priority
           />
         </div>
         <div className="relative z-10 h-screen overflow-y-auto">
           <div className="max-w-4xl mx-auto px-4 pt-8 pb-32">
-            <div className="h-8 bg-gray-200 rounded w-1/4 mb-6"></div>
+            <div className="h-8 bg-white/20 rounded w-1/4 mb-6"></div>
             <div className="space-y-4">
-              <div className="h-4 bg-gray-200 rounded w-3/4"></div>
-              <div className="h-4 bg-gray-200 rounded w-1/2"></div>
-              <div className="h-4 bg-gray-200 rounded w-2/3"></div>
+              <div className="h-4 bg-white/20 rounded w-3/4"></div>
+              <div className="h-4 bg-white/20 rounded w-1/2"></div>
+              <div className="h-4 bg-white/20 rounded w-2/3"></div>
             </div>
           </div>
         </div>
@@ -149,7 +149,7 @@ export default function SettingsPage() {
 
   return (
     <AuthGuard>
-      <div className="fixed inset-0 overflow-hidden bg-white">
+      <div className="min-h-screen bg-black">
       {/* Background letter */}
       <div className="absolute inset-0 flex items-center justify-center overflow-hidden">
         <Image
@@ -162,18 +162,18 @@ export default function SettingsPage() {
             width: '150vh',
             height: '150vh',
             objectFit: 'contain',
-            filter: 'brightness(0)'
+            filter: 'brightness(0) invert(1)'
           }}
           priority
         />
       </div>
       
       {/* Content */}
-      <div className="relative z-10 h-screen overflow-y-auto">
-        <div className="max-w-4xl mx-auto px-4 pt-8 pb-32">
-          <div className="flex items-center space-x-3 mb-8 pt-8">
-            <Settings className="w-8 h-8 text-gray-900" />
-            <h1 className="text-3xl font-bold text-gray-900">Settings</h1>
+      <div className="relative z-10 min-h-screen">
+        <div className="max-w-4xl mx-auto px-4 pt-24 pb-48">
+          <div className="flex items-center space-x-3 mb-8">
+            <Settings className="w-8 h-8 text-white" />
+            <h1 className="text-3xl font-bold text-white">Settings</h1>
           </div>
 
         {message && (
@@ -187,17 +187,17 @@ export default function SettingsPage() {
         )}
 
         {/* App Preferences */}
-        <div className="bg-gray-50/80 backdrop-blur-sm rounded-lg p-6 border border-gray-200 mb-8">
-          <h2 className="text-xl font-semibold text-gray-900 mb-6 flex items-center">
-            <User className="w-5 h-5 mr-2 text-gray-700" />
+        <div className="bg-white/20 backdrop-blur-sm rounded-2xl p-8 border-2 border-white/30 mb-8">
+          <h2 className="text-2xl font-bold text-white mb-6 flex items-center">
+            <User className="w-6 h-6 mr-3 text-white" />
             App Preferences
           </h2>
           
           <div className="space-y-4">
             <div className="flex items-center justify-between">
               <div>
-                <h3 className="font-medium text-gray-900">Enable Tooltips</h3>
-                <p className="text-sm text-gray-600">Show helpful hints throughout the app</p>
+                <h3 className="font-medium text-white">Enable Tooltips</h3>
+                <p className="text-sm text-white/80">Show helpful hints throughout the app</p>
               </div>
               <label className="relative inline-flex items-center cursor-pointer">
                 <input
@@ -206,24 +206,24 @@ export default function SettingsPage() {
                   onChange={(e) => setProfile({ ...profile, tooltips_enabled: e.target.checked })}
                   className="sr-only peer"
                 />
-                <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-gray-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-gray-800"></div>
+                <div className="w-11 h-6 bg-white/20 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-white/30 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-white/30 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-white/40"></div>
               </label>
             </div>
           </div>
         </div>
 
         {/* Notifications */}
-        <div className="bg-gray-50/80 backdrop-blur-sm rounded-lg p-6 border border-gray-200 mb-8">
-          <h2 className="text-xl font-semibold text-gray-900 mb-6 flex items-center">
-            <Bell className="w-5 h-5 mr-2 text-gray-700" />
+        <div className="bg-white/20 backdrop-blur-sm rounded-2xl p-8 border-2 border-white/30 mb-8">
+          <h2 className="text-2xl font-bold text-white mb-6 flex items-center">
+            <Bell className="w-6 h-6 mr-3 text-white" />
             Notifications
           </h2>
           
           <div className="space-y-4">
             <div className="flex items-center justify-between">
               <div>
-                <h3 className="font-medium text-gray-900">Email Notifications</h3>
-                <p className="text-sm text-gray-600">Receive updates via email</p>
+                <h3 className="font-medium text-white">Email Notifications</h3>
+                <p className="text-sm text-white/80">Receive updates via email</p>
               </div>
               <label className="relative inline-flex items-center cursor-pointer">
                 <input
@@ -232,14 +232,14 @@ export default function SettingsPage() {
                   onChange={(e) => handleNotificationChange('email', e.target.checked)}
                   className="sr-only peer"
                 />
-                <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-gray-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-gray-800"></div>
+                <div className="w-11 h-6 bg-white/20 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-white/30 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-white/30 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-white/40"></div>
               </label>
             </div>
 
             <div className="flex items-center justify-between">
               <div>
-                <h3 className="font-medium text-gray-900">Push Notifications</h3>
-                <p className="text-sm text-gray-600">Receive push notifications on your device</p>
+                <h3 className="font-medium text-white">Push Notifications</h3>
+                <p className="text-sm text-white/80">Receive push notifications on your device</p>
               </div>
               <label className="relative inline-flex items-center cursor-pointer">
                 <input
@@ -248,14 +248,14 @@ export default function SettingsPage() {
                   onChange={(e) => handleNotificationChange('push', e.target.checked)}
                   className="sr-only peer"
                 />
-                <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-gray-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-gray-800"></div>
+                <div className="w-11 h-6 bg-white/20 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-white/30 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-white/30 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-white/40"></div>
               </label>
             </div>
 
             <div className="flex items-center justify-between">
               <div>
-                <h3 className="font-medium text-gray-900">News Updates</h3>
-                <p className="text-sm text-gray-600">Get notified about new rugby news</p>
+                <h3 className="font-medium text-white">News Updates</h3>
+                <p className="text-sm text-white/80">Get notified about new rugby news</p>
               </div>
               <label className="relative inline-flex items-center cursor-pointer">
                 <input
@@ -264,14 +264,14 @@ export default function SettingsPage() {
                   onChange={(e) => handleNotificationChange('news', e.target.checked)}
                   className="sr-only peer"
                 />
-                <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-gray-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-gray-800"></div>
+                <div className="w-11 h-6 bg-white/20 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-white/30 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-white/30 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-white/40"></div>
               </label>
             </div>
 
             <div className="flex items-center justify-between">
               <div>
-                <h3 className="font-medium text-gray-900">Social Media Updates</h3>
-                <p className="text-sm text-gray-600">Get notified about social media activity</p>
+                <h3 className="font-medium text-white">Social Media Updates</h3>
+                <p className="text-sm text-white/80">Get notified about social media activity</p>
               </div>
               <label className="relative inline-flex items-center cursor-pointer">
                 <input
@@ -280,24 +280,24 @@ export default function SettingsPage() {
                   onChange={(e) => handleNotificationChange('social', e.target.checked)}
                   className="sr-only peer"
                 />
-                <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-gray-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-gray-800"></div>
+                <div className="w-11 h-6 bg-white/20 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-white/30 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-white/30 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-white/40"></div>
               </label>
             </div>
           </div>
         </div>
 
         {/* Privacy Settings */}
-        <div className="bg-gray-50/80 backdrop-blur-sm rounded-lg p-6 border border-gray-200 mb-8">
-          <h2 className="text-xl font-semibold text-gray-900 mb-6 flex items-center">
-            <Shield className="w-5 h-5 mr-2 text-gray-700" />
+        <div className="bg-white/20 backdrop-blur-sm rounded-2xl p-8 border-2 border-white/30 mb-8">
+          <h2 className="text-2xl font-bold text-white mb-6 flex items-center">
+            <Shield className="w-6 h-6 mr-3 text-white" />
             Privacy Settings
           </h2>
           
           <div className="space-y-4">
             <div className="flex items-center justify-between">
               <div>
-                <h3 className="font-medium text-gray-900">Profile Visibility</h3>
-                <p className="text-sm text-gray-600">Make your profile visible to other users</p>
+                <h3 className="font-medium text-white">Profile Visibility</h3>
+                <p className="text-sm text-white/80">Make your profile visible to other users</p>
               </div>
               <label className="relative inline-flex items-center cursor-pointer">
                 <input
@@ -306,14 +306,14 @@ export default function SettingsPage() {
                   onChange={(e) => handlePrivacyChange('profileVisible', e.target.checked)}
                   className="sr-only peer"
                 />
-                <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-gray-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-gray-800"></div>
+                <div className="w-11 h-6 bg-white/20 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-white/30 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-white/30 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-white/40"></div>
               </label>
             </div>
 
             <div className="flex items-center justify-between">
               <div>
-                <h3 className="font-medium text-gray-900">Show Contact Information</h3>
-                <p className="text-sm text-gray-600">Display your contact information on your profile</p>
+                <h3 className="font-medium text-white">Show Contact Information</h3>
+                <p className="text-sm text-white/80">Display your contact information on your profile</p>
               </div>
               <label className="relative inline-flex items-center cursor-pointer">
                 <input
@@ -322,22 +322,22 @@ export default function SettingsPage() {
                   onChange={(e) => handlePrivacyChange('showContactInfo', e.target.checked)}
                   className="sr-only peer"
                 />
-                <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-gray-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-gray-800"></div>
+                <div className="w-11 h-6 bg-white/20 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-white/30 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-white/30 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-white/40"></div>
               </label>
             </div>
           </div>
         </div>
 
         {/* Appearance */}
-        <div className="bg-gray-50/80 backdrop-blur-sm rounded-lg p-6 border border-gray-200 mb-8">
-          <h2 className="text-xl font-semibold text-gray-900 mb-6 flex items-center">
-            <Palette className="w-5 h-5 mr-2 text-gray-700" />
+        <div className="bg-white/20 backdrop-blur-sm rounded-2xl p-8 border-2 border-white/30 mb-8">
+          <h2 className="text-2xl font-bold text-white mb-6 flex items-center">
+            <Palette className="w-6 h-6 mr-3 text-white" />
             Appearance
           </h2>
           
           <div className="space-y-4">
             <div>
-              <label htmlFor="theme" className="block text-sm font-medium text-gray-700 mb-2">
+              <label htmlFor="theme" className="block text-sm font-medium text-white mb-2">
                 Theme
               </label>
               <select
@@ -347,16 +347,16 @@ export default function SettingsPage() {
                   ...prev,
                   appearance: { ...prev.appearance, theme: e.target.value }
                 }))}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-transparent"
+                className="w-full px-3 py-2 bg-white/20 border-2 border-white/30 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-white/50 focus:border-white/50"
               >
-                <option value="auto">Auto (System)</option>
-                <option value="light">Light</option>
-                <option value="dark">Dark</option>
+                <option value="auto" className="text-gray-900">Auto (System)</option>
+                <option value="light" className="text-gray-900">Light</option>
+                <option value="dark" className="text-gray-900">Dark</option>
               </select>
             </div>
 
             <div>
-              <label htmlFor="colorScheme" className="block text-sm font-medium text-gray-700 mb-2">
+              <label htmlFor="colorScheme" className="block text-sm font-medium text-white mb-2">
                 Color Scheme
               </label>
               <select
@@ -366,11 +366,11 @@ export default function SettingsPage() {
                   ...prev,
                   appearance: { ...prev.appearance, colorScheme: e.target.value }
                 }))}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-transparent"
+                className="w-full px-3 py-2 bg-white/20 border-2 border-white/30 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-white/50 focus:border-white/50"
               >
-                <option value="osm-blue">OSM Blue</option>
-                <option value="osm-green">OSM Green</option>
-                <option value="osm-red">OSM Red</option>
+                <option value="osm-blue" className="text-gray-900">OSM Blue</option>
+                <option value="osm-green" className="text-gray-900">OSM Green</option>
+                <option value="osm-red" className="text-gray-900">OSM Red</option>
               </select>
             </div>
           </div>
@@ -381,7 +381,7 @@ export default function SettingsPage() {
           <button
             onClick={handleSaveProfile}
             disabled={saving}
-            className="bg-gray-800 text-white px-6 py-3 rounded-lg font-medium hover:bg-gray-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center space-x-2"
+            className="bg-white/20 text-white px-6 py-3 rounded-lg font-medium hover:bg-white/30 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center space-x-2 border-2 border-white/30"
           >
             <Save className="w-4 h-4" />
             <span>{saving ? 'Saving...' : 'Save Settings'}</span>

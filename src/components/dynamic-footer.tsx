@@ -7,22 +7,16 @@ import { useAuth } from './providers'
 import { supabase } from '@/lib/supabase'
 import { useState, useEffect } from 'react'
 import { 
-  Home, 
   Newspaper, 
   Users, 
-  HelpCircle
+  HelpCircle,
+  Route
 } from 'lucide-react'
 
 export function DynamicFooter() {
   const { currentColor } = useColor()
   const { user } = useAuth()
   const [userRole, setUserRole] = useState<'admin' | 'user' | null>(null)
-
-  useEffect(() => {
-    if (user) {
-      loadUserRole()
-    }
-  }, [user])
 
   const loadUserRole = async () => {
     try {
@@ -40,11 +34,15 @@ export function DynamicFooter() {
     }
   }
 
+  useEffect(() => {
+    if (user) {
+      loadUserRole()
+    }
+  }, [user, loadUserRole])
+
   const getBottomNavItems = () => {
     const baseItems = [
-      { name: 'Home', href: '/', icon: Home },
       { name: 'News', href: '/news', icon: Newspaper },
-      { name: 'Support', href: '/support', icon: HelpCircle },
     ]
 
     // Check if user is admin by role or by email (fallback)
@@ -52,13 +50,16 @@ export function DynamicFooter() {
     
     if (isAdmin) {
       return [
-        ...baseItems,
         { name: 'Players', href: '/players', icon: Users },
+        ...baseItems,
+        { name: 'Routes', href: 'https://learner.routes-app.com', icon: Route },
       ]
     } else {
       return [
-        ...baseItems,
         { name: 'Social', href: '/social', icon: Users },
+        ...baseItems,
+        { name: 'Support', href: '/support', icon: HelpCircle },
+        { name: 'Routes', href: 'https://learner.routes-app.com', icon: Route },
       ]
     }
   }

@@ -18,7 +18,7 @@ export function AnimatedLetters() {
     }, 5000) // Change every 5 seconds
 
     return () => clearInterval(interval)
-  }, [])
+  }, [colors.length])
 
   const currentLetter = colors[currentColor]
 

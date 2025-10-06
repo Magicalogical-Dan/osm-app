@@ -44,12 +44,6 @@ export default function PlayerProfilePage() {
   const [player, setPlayer] = useState<Player | null>(null)
   const [loading, setLoading] = useState(true)
 
-  useEffect(() => {
-    if (user && params.slug) {
-      loadPlayer()
-    }
-  }, [user, params.slug])
-
   const loadPlayer = async () => {
     try {
       const { data, error } = await supabase
@@ -70,6 +64,12 @@ export default function PlayerProfilePage() {
       setLoading(false)
     }
   }
+
+  useEffect(() => {
+    if (user && params.slug) {
+      loadPlayer()
+    }
+  }, [user, params.slug, loadPlayer])
 
   const socialLinks = [
     {

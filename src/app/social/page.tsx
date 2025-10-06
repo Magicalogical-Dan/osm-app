@@ -22,12 +22,6 @@ export default function SocialPage() {
   const { user } = useAuth()
   const [profile, setProfile] = useState<Profile | null>(null)
   const [loading, setLoading] = useState(true)
-  useEffect(() => {
-    if (user) {
-      loadProfile()
-    }
-  }, [user])
-
   const loadProfile = async () => {
     try {
       const { data } = await supabase
@@ -45,6 +39,12 @@ export default function SocialPage() {
       setLoading(false)
     }
   }
+
+  useEffect(() => {
+    if (user) {
+      loadProfile()
+    }
+  }, [user, loadProfile])
 
   // George Williams' social media profiles with hardcoded data
   const socialLinks = [
