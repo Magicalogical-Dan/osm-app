@@ -49,7 +49,7 @@ export default function Home() {
         {/* Single large letter in background - will be handled by CyclingBackground */}
         
         {/* Content */}
-        <div className="relative z-10 flex items-center justify-center px-3 sm:px-4 py-4 sm:py-6">
+        <div className="relative z-10 min-h-screen flex items-center justify-center px-3 sm:px-4 py-8">
           <div className="w-full max-w-md">
             {/* OSM Logo */}
             <div className="mb-4 sm:mb-6 lg:mb-8 flex justify-center">
