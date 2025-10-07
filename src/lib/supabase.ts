@@ -25,7 +25,7 @@ export interface Profile {
   club?: string
   position?: string
   bio?: string
-  sport?: 'rugby_league' | 'rugby_union'
+  sport?: 'football' | 'basketball' | 'tennis' | 'athletics'
   instagram_url?: string
   tiktok_url?: string
   twitter_url?: string
@@ -41,7 +41,7 @@ export interface NewsArticle {
   excerpt?: string
   url: string
   source: string
-  sport: 'rugby_league' | 'rugby_union' | 'both'
+  sport: 'football' | 'basketball' | 'tennis' | 'athletics' | 'all'
   league?: string
   club?: string
   competition?: string

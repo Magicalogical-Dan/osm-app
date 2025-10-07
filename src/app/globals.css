@@ -226,3 +226,31 @@ html {
   -ms-user-select: none;
   user-select: none;
 }
+
+/* Large desktop centering (1600px+) - Homepage only */
+@media (min-width: 1600px) {
+  .homepage-large-desktop-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    overflow: hidden; /* Prevent scrolling when content fits */
+  }
+  
+  .homepage-large-desktop-content {
+    max-width: 1400px;
+    width: 100%;
+    margin: 0 auto;
+    max-height: 100vh;
+    overflow: hidden; /* Remove scrolling from inner content */
+  }
+  
+  /* Override h-screen and overflow classes on large desktops for homepage */
+  .homepage-large-desktop-center.h-screen {
+    height: 100vh;
+  }
+  
+  .homepage-large-desktop-center.overflow-y-auto {
+    overflow-y: hidden;
+  }
+}

@@ -81,6 +81,40 @@ export default function SupportPage() {
           </div>
 
 
+         {/* FRANKLYN Financial Support */}
+         <div className="bg-white/20 backdrop-blur-sm rounded-2xl p-8 border-2 border-white/30 mb-8">
+           <h2 className="text-2xl font-bold text-white mb-6">Financial Support</h2>
+           
+           <div className="flex flex-col md:flex-row items-center gap-6">
+             <div className="flex-shrink-0">
+               <Image
+                 src="/images/Franklyn_EliteSports_White.webp"
+                 alt="FRANKLYN Financial"
+                 width={200}
+                 height={80}
+                 className="h-16 w-auto"
+               />
+             </div>
+             <div className="flex-1 text-center md:text-left">
+               <h3 className="text-xl font-semibold text-white mb-2">FRANKLYN Financial Support</h3>
+               <p className="text-white/80 mb-4">
+                 Professional financial services and support for athletes and sports professionals.
+               </p>
+               <a 
+                 href="https://sport.franklyn.co.uk" 
+                 target="_blank" 
+                 rel="noopener noreferrer"
+                 className="inline-flex items-center gap-2 bg-white/20 text-white px-6 py-3 rounded-lg font-medium hover:bg-white/30 transition-all duration-300 border border-white/30 hover:border-white/50"
+               >
+                 <span>Visit FRANKLYN</span>
+                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                 </svg>
+               </a>
+             </div>
+           </div>
+         </div>
+
          {/* Team Members */}
          <div className="bg-white/20 backdrop-blur-sm rounded-2xl p-8 border-2 border-white/30 mb-8">
            <h2 className="text-2xl font-bold text-white mb-6">Our Team</h2>
@@ -96,7 +130,7 @@ export default function SupportPage() {
              
              <div className="bg-white/10 rounded-lg p-4 border border-white/20">
                <h4 className="font-semibold text-white">Ian Sibbit</h4>
-               <p className="text-white/80 text-sm mb-2">Rugby League</p>
+               <p className="text-white/80 text-sm mb-2">Sports Management</p>
                <a href="mailto:ian@outside-sport.com" className="text-white/80 text-sm hover:text-white transition-colors">
                  ian@outside-sport.com
                </a>

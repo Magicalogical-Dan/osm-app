@@ -255,7 +255,7 @@ export default function SettingsPage() {
             <div className="flex items-center justify-between">
               <div>
                 <h3 className="font-medium text-white">News Updates</h3>
-                <p className="text-sm text-white/80">Get notified about new rugby news</p>
+                <p className="text-sm text-white/80">Get notified about new sports news</p>
               </div>
               <label className="relative inline-flex items-center cursor-pointer">
                 <input

@@ -334,8 +334,10 @@ export default function ProfilePage() {
                     className="w-full px-3 py-2 bg-white/20 border-2 border-white/30 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-white/50 focus:border-white/50"
                   >
                     <option value="" className="text-gray-900">Select your sport</option>
-                    <option value="rugby_league" className="text-gray-900">Rugby League</option>
-                    <option value="rugby_union" className="text-gray-900">Rugby Union</option>
+                    <option value="football" className="text-gray-900">Football</option>
+                    <option value="basketball" className="text-gray-900">Basketball</option>
+                    <option value="tennis" className="text-gray-900">Tennis</option>
+                    <option value="athletics" className="text-gray-900">Athletics</option>
                   </select>
                 </div>
               </div>
@@ -385,12 +387,14 @@ export default function ProfilePage() {
                 <select
                   id="profile_sport"
                   value={profile.sport || ''}
-                  onChange={(e) => setProfile({ ...profile, sport: e.target.value as 'rugby_league' | 'rugby_union' })}
+                  onChange={(e) => setProfile({ ...profile, sport: e.target.value as 'football' | 'basketball' | 'tennis' | 'athletics' })}
                   className="w-full px-3 py-2 bg-white/20 border-2 border-white/30 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-white/50 focus:border-white/50"
                 >
                   <option value="" className="text-gray-900">Select your sport</option>
-                  <option value="rugby_league" className="text-gray-900">Rugby League</option>
-                  <option value="rugby_union" className="text-gray-900">Rugby Union</option>
+                  <option value="football" className="text-gray-900">Football</option>
+                  <option value="basketball" className="text-gray-900">Basketball</option>
+                  <option value="tennis" className="text-gray-900">Tennis</option>
+                  <option value="athletics" className="text-gray-900">Athletics</option>
                 </select>
               </div>
 

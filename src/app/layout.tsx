@@ -6,7 +6,7 @@ import { BackgroundLetters } from "@/components/background-letters";
 
 export const metadata: Metadata = {
   title: "OSM - Outside Sport Management",
-  description: "Platform for rugby league and rugby union players",
+  description: "Platform for sports management and player development",
 };
 
 export default function RootLayout({

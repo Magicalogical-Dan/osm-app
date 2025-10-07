@@ -72,7 +72,7 @@ export default function Home() {
 
   const getQuickLinks = () => {
     const baseLinks = [
-      { name: 'News', href: '/news', icon: Newspaper, color: 'osm-blue', description: 'Stay updated with the latest rugby news' },
+      { name: 'News', href: '/news', icon: Newspaper, color: 'osm-blue', description: 'Stay updated with the latest sports news' },
     ]
 
     // Check if user is admin by role or by email (fallback)
@@ -99,15 +99,15 @@ export default function Home() {
       <CyclingBackground />
       
       {/* Content */}
-      <div className="relative z-10 flex items-center justify-center px-3 sm:px-4 py-4 sm:py-6 lg:py-8">
-        <div className="w-full max-w-6xl">
+      <div className="relative z-10 flex items-center justify-center px-3 sm:px-4 py-4 sm:py-6 lg:py-8 homepage-large-desktop-center">
+        <div className="w-full max-w-6xl homepage-large-desktop-content">
           {/* Welcome Message */}
           <div className="text-center mb-4 sm:mb-6 lg:mb-8">
             <h1 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-white mb-2 sm:mb-3 lg:mb-4 animate-fade-in drop-shadow-lg">
               Welcome back, {user.email?.split('@')[0]}!
             </h1>
             <p className="text-sm sm:text-base md:text-lg lg:text-xl text-white/90 animate-slide-up drop-shadow-md">
-              Your rugby management dashboard is ready
+              Your sports management dashboard is ready
             </p>
           </div>
 

@@ -80,7 +80,7 @@ export default function SocialPage() {
   const downloadGuides = [
     {
       title: 'Social Media Best Practices Guide',
-      description: 'Complete guide to building your social media presence as a rugby player',
+      description: 'Complete guide to building your social media presence as a sports professional',
       icon: FileText,
       downloadUrl: '#',
       size: '2.4 MB',
@@ -96,7 +96,7 @@ export default function SocialPage() {
     },
     {
       title: 'Hashtag Research Guide',
-      description: 'Find the best hashtags for rugby and sports content',
+      description: 'Find the best hashtags for sports and athletic content',
       icon: Share2,
       downloadUrl: '#',
       size: '850 KB',
